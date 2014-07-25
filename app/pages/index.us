@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Illinois EPA Ordinance Map Display</title>
+    <link rel="stylesheet" href="assets/leaflet-0.7.3/leaflet.css">
+    <link rel="stylesheet" type="text/css" href="<%= css %>" media="all" />
+  </head>
+  <body>
+    <div id="map" ></div>
+    <div id='switchBase'><button id='switchBaseButton' type='button' onclick='switchBasemap()'>Imagery</button></div>
+  </body>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="assets/leaflet-0.7.3/leaflet.js"></script>
+  <script src="assets/esri-leaflet/esri-leaflet.js"></script>
+  <script type="text/javascript" src="<%= js %>"></script>
+</html>
