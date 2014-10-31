@@ -5,12 +5,31 @@ html, body, #map {
 }
 
 #switchBase {
-    width:20m;
-    height: 3m;
-    background-color: yellow;
-    z-index: 10;
-    position: absolute;
-    top: 10px;
-    right: 10px;
+  width:20m;
+  height: 3m;
+  background-color: yellow;
+  z-index: 10;
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }
+
+#noDataDiv {
+  background-color: beige;
+  display: none;
+  position: absolute;
+  top: 30%;
+  left: 40%;
+  width: 300px;
+  height: 200px;
+  margin: 0, auto;
+  z-index: 20;
+}
+
+#noDataDiv h2 {
+  text-align: center;
+}
+
+#noDataDiv h3 {
+  text-align: center;
 }

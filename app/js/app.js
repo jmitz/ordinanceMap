@@ -31,13 +31,6 @@ var QueryString = function () {
     return query_string;
 } ();
 
-var map = L.map('map',{
-  maxZoom: 18,
-  minZoom:6,
-  zoom: 7,
-  center: [40, -89.5],
-});
-
 curBasemap = 0;
 
 basemaps = [{
@@ -52,14 +45,23 @@ basemaps = [{
     ])
 }];
 
-referenceLayer = L.esri.dynamicMapLayer('http://epa084dgis01.iltest.illinois.gov:6080/arcgis/rest/services/Mitzelfelt/groundwaterOrdinance/MapServer',{
+referenceLayer = L.esri.dynamicMapLayer('http://geoservices.epa.illinois.gov/arcgis/rest/services/Boundaries/GroundwaterOrdinance/MapServer',{
     layers: [0], // 0 is ordinances
     opacity: 0.5 
 });
 
+var map = L.map('map',{
+  maxZoom: 18,
+  minZoom:6,
+  zoom: 7,
+  center: [40, -89.5],
+  layers: [basemaps[curBasemap].layer, referenceLayer]
+});
+
+
 whereClause = "DLC_ID = '" + QueryString.ordinance + "'";
 
-featureLayer = L.esri.featureLayer('http://epa084dgis01.iltest.illinois.gov:6080/arcgis/rest/services/Mitzelfelt/groundwaterOrdinance/FeatureServer/0',{
+featureLayer = L.esri.featureLayer('http://geoservices.epa.illinois.gov/arcgis/rest/services/Boundaries/GroundwaterOrdinance/FeatureServer/0',{
   where: whereClause,
   precision: 5,
   crs: L.CRS.EPSG3857,
@@ -82,9 +84,7 @@ if (curOrdinance !== QueryString.ordinance){
   curOrdinance = QueryString.ordinance;  
 }
 featureLayer.on('load', function(e){
-  console.log(e);
-  console.log(fitted);
-  if(!fitted){
+  if(!fitted && typeof(QueryString.ordinance)==='string'){
     try{
       map.fitBounds(featureLayer);
       fitted=true;
@@ -92,8 +92,10 @@ featureLayer.on('load', function(e){
     catch(err){
       // Display Unavailable Message
       console.log('No Feature Available');
+      $('#dlcId').html(QueryString.ordinance);
+      $('#noDataDiv').show();
     }
   }
 });
 
-map.addLayer(basemaps[curBasemap].layer).addLayer(referenceLayer).addLayer(featureLayer);
+map.addLayer(featureLayer);

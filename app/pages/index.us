@@ -8,6 +8,11 @@
     <link rel="stylesheet" type="text/css" href="<%= css %>" media="all" />
   </head>
   <body>
+    <div id='noDataDiv'>
+      <h2>No Data for <span id='dlcId'>This Record</span></h2>
+      <h3>We're sorry there are no locational data tied to the chosen record.</h3>
+      <h3>Close the map window to return to the selection list.</h3>
+    </div>
     <div id="map" ></div>
     <div id='switchBase'><button id='switchBaseButton' type='button' onclick='switchBasemap()'>Imagery</button></div>
   </body>
